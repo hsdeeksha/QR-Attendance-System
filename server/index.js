@@ -12,19 +12,20 @@ const authRoutes = require('./routes/auth');
 const attendanceRoutes = require('./routes/attendance');
 const storage = require('./storage');
 
+
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST']
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
   }
 });
 
 app.set('io', io);
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
