@@ -1,0 +1,1 @@
+This folder contains the React pages for the attendance application.
